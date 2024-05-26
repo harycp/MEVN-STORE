@@ -52,7 +52,7 @@
           </button>
         </div>
       </div>
-      <div ref="bestSliderContainer" class="best-slider-container">
+      <div class="best-slider-container">
         <BestSlider
           v-for="product in bestProducts"
           :key="product.id"
