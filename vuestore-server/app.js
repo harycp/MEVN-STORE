@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 8000;
 
 app.use(
   cors({
-    origin: ["https://mevn-store.vercel.app/"],
+    origin: ["https://mevn-store-full.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
