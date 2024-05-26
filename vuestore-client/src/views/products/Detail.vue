@@ -68,7 +68,7 @@
 <script>
 import axios from "axios";
 import Notfound from "../error/404.vue";
-import { EventBus } from "../../even-bus.js"; // Import event bus
+import { EventBus } from "../../event-bus.js"; // Import event bus
 import BestSlider from "../../components/BestSlider.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import NewsLetter from "../../components/Newsletter.vue";
@@ -148,15 +148,27 @@ export default {
         behavior: "smooth",
       });
     },
+    async fetchProduct(id) {
+      try {
+        const result = await axios.get(
+          `https://mevn-store.vercel.app/api/products/${id}`
+        );
+        this.product = result.data;
+      } catch (error) {
+        console.error("Failed to fetch product:", error);
+        this.product = null; // Set product to null if fetching fails
+      }
+    },
+  },
+  watch: {
+    "$route.params.id": {
+      immediate: true,
+      handler(newId) {
+        this.fetchProduct(newId);
+      },
+    },
   },
   async created() {
-    const code = this.$route.params.id;
-    const result = await axios.get(
-      `https://mevn-store.vercel.app/api/products/${code}`
-    );
-
-    this.product = result.data;
-
     const result_rating = await axios.get(
       "https://mevn-store.vercel.app/api/products/all/best"
     );
