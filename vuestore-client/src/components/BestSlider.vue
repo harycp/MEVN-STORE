@@ -8,7 +8,7 @@
         >
           <div class="item-header">
             <img
-              :src="`http://localhost:8000${product.imageUrl}.png`"
+              :src="`https://mevn-store.vercel.app${product.imageUrl}.png`"
               :alt="product.name"
             />
           </div>

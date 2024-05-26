@@ -64,7 +64,9 @@ export default {
     },
   },
   async created() {
-    const result = await axios.get("http://localhost:8000/api/products");
+    const result = await axios.get(
+      "https://mevn-store.vercel.app/api/products"
+    );
     this.products = result.data;
 
     const category = this.$route.params.category || "All";

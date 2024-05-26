@@ -81,7 +81,7 @@ export default {
     async fetchCartItems() {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/orders/user/${this.userId}`
+          `https://mevn-store.vercel.app/api/orders/user/${this.userId}`
         );
         const order = response.data[0]; // Assuming one order per user
         if (order && order.cart_items) {

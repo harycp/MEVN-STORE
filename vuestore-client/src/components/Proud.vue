@@ -4,7 +4,7 @@
     class="product"
   >
     <img
-      :src="`http://localhost:8000${product.imageUrl}.png`"
+      :src="`https://mevn-store.vercel.app${product.imageUrl}.png`"
       :alt="product.name"
       class="product-image"
     />

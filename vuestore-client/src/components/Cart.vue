@@ -30,7 +30,7 @@
                 <div class="cart-items">
                   <div class="item-left">
                     <img
-                      :src="`http://localhost:8000${item.imageUrl}.png`"
+                      :src="`https://mevn-store.vercel.app${item.imageUrl}.png`"
                       alt="item.name"
                     />
                   </div>
@@ -105,7 +105,7 @@ export default {
     async updateQuantity(item, newQuantity) {
       if (newQuantity < 1) return;
       const response = await axios.put(
-        `http://localhost:8000/api/orders/user/${this.userId}/update`,
+        `https://mevn-store.vercel.app/api/orders/user/${this.userId}/update`,
         {
           product: { code: item.code },
           quantity: newQuantity,
@@ -118,7 +118,7 @@ export default {
     },
     async removeFromCart(productCode) {
       const response = await axios.delete(
-        `http://localhost:8000/api/orders/user/${this.userId}/product/${productCode}`
+        `https://mevn-store.vercel.app/api/orders/user/${this.userId}/product/${productCode}`
       );
       if (response.status === 200) {
         this.cartItems = this.cartItems.filter(
@@ -130,7 +130,7 @@ export default {
   },
   async created() {
     const result = await axios.get(
-      `http://localhost:8000/api/orders/user/${this.userId}`
+      `https://mevn-store.vercel.app/api/orders/user/${this.userId}`
     );
     let data = result.data.map((order) => ({
       ...order,

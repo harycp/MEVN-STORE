@@ -9,7 +9,7 @@
             @mouseleave="resetImage"
           >
             <img
-              :src="`http://localhost:8000${product.imageUrl}.png`"
+              :src="`https://mevn-store.vercel.app${product.imageUrl}.png`"
               :alt="product.name"
               ref="zoomImage"
               :class="{ zoomed: isZoomed }"
@@ -105,10 +105,13 @@ export default {
       }
     },
     async addToCart(product) {
-      await axios.post("http://localhost:8000/api/orders/update/user/1", {
-        product: product,
-        quantity: this.quantity,
-      });
+      await axios.post(
+        "https://mevn-store.vercel.app/api/orders/update/user/1",
+        {
+          product: product,
+          quantity: this.quantity,
+        }
+      );
       EventBus.$emit("item-added-to-cart", {
         product,
         quantity: this.quantity,
@@ -149,13 +152,13 @@ export default {
   async created() {
     const code = this.$route.params.id;
     const result = await axios.get(
-      `http://localhost:8000/api/products/${code}`
+      `https://mevn-store.vercel.app/api/products/${code}`
     );
 
     this.product = result.data;
 
     const result_rating = await axios.get(
-      "http://localhost:8000/api/products/all/best"
+      "https://mevn-store.vercel.app/api/products/all/best"
     );
     this.bestProducts = result_rating.data;
   },

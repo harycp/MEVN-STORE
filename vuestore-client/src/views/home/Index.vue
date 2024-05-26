@@ -142,11 +142,11 @@ export default {
   },
   async created() {
     const result = await axios.get(
-      "http://localhost:8000/api/products/all/proud"
+      "https://mevn-store.vercel.app/api/products/all/proud"
     );
     this.products = result.data;
     const result_rating = await axios.get(
-      "http://localhost:8000/api/products/all/best"
+      "https://mevn-store.vercel.app/api/products/all/best"
     );
     this.bestProducts = result_rating.data;
   },
