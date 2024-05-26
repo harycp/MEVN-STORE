@@ -105,17 +105,23 @@ export default {
       }
     },
     async addToCart(product) {
-      await axios.post(
-        "https://mevn-store.vercel.app/api/orders/update/user/1",
-        {
-          product: product,
+      try {
+        const response = await axios.post(
+          "https://mevn-store.vercel.app/api/orders/update/user/1",
+          {
+            product: product,
+            quantity: this.quantity,
+          }
+        );
+        console.log("Item added to cart:", response.data);
+        EventBus.$emit("item-added-to-cart", {
+          product,
           quantity: this.quantity,
-        }
-      );
-      EventBus.$emit("item-added-to-cart", {
-        product,
-        quantity: this.quantity,
-      }); // Emit event
+        }); // Emit event
+      } catch (error) {
+        console.error("Error adding item to cart:", error);
+        alert("Failed to add item to cart. Please try again.");
+      }
     },
     buyNow() {
       this.$store.commit("addToCart", {
