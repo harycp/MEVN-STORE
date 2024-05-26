@@ -2,10 +2,7 @@
   <div class="bestProduct">
     <div class="container">
       <div class="row-container">
-        <router-link
-          :to="{ name: 'product-details', params: { id: product.code } }"
-          class="row-item"
-        >
+        <div class="row-item" @click="navigateToProduct">
           <div class="item-header">
             <img
               :src="`https://mevn-store.vercel.app${product.imageUrl}.png`"
@@ -16,7 +13,7 @@
             <p>{{ product.name }}</p>
             <p class="item-price">Rp{{ formattedPrice }}</p>
           </div>
-        </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -28,6 +25,11 @@ export default {
   computed: {
     formattedPrice() {
       return Number(this.product.price).toFixed(2);
+    },
+  },
+  methods: {
+    navigateToProduct() {
+      window.location.href = `/product-details/${this.product.code}`;
     },
   },
 };
