@@ -1,0 +1,9 @@
+TAHAPAN PEMBUATAN BACK-END NYA :
+
+1. Buat config dan model productnya
+2. Testing dummy data ke mongodb
+3. creating for nampilin data products pake api
+4. Menampilkan data order dan productnya
+5. Menambahkan item products pada orders
+6. Menghapus Data Cart items pada data orders
+7. Menambahkan path url
