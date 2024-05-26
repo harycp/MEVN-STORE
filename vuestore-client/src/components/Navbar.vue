@@ -86,7 +86,6 @@ export default {
         const order = response.data[0]; // Assuming one order per user
         if (order && order.cart_items) {
           this.cartItems = order.cart_items;
-          console.log(this.cartItems); // Log the cart items to check the data
         }
       } catch (error) {
         console.error("Error fetching cart items:", error);
