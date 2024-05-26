@@ -42,6 +42,10 @@ app.get("/", (req, res) => {
   res.send("Hy Everyone");
 });
 
+app.get("/api", (req, res) => {
+  res.send("Hy Everyone");
+});
+
 require("./app/routes/product.routes")(app);
 require("./app/routes/order.routes")(app);
 
