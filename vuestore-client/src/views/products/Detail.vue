@@ -84,7 +84,7 @@ export default {
   },
   data() {
     return {
-      product: {},
+      product: null,
       bestProducts: [],
       quantity: 1,
       isZoomed: false,
@@ -164,11 +164,14 @@ export default {
     "$route.params.id": {
       immediate: true,
       handler(newId) {
+        this.quantity = 1; // Reset the quantity to 1
         this.fetchProduct(newId);
       },
     },
   },
   async created() {
+    this.fetchProduct(this.$route.params.id);
+
     const result_rating = await axios.get(
       "https://mevn-store.vercel.app/api/products/all/best"
     );
