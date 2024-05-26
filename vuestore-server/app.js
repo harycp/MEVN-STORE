@@ -1,21 +1,22 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
-
 const path = require("path");
+
+const app = express();
 const PORT = process.env.PORT || 8000;
 
 app.use(
   cors({
     origin: ["https://mevn-store.vercel.app/"],
-    method: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -23,12 +24,13 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
 app.use("/img", express.static(path.join(__dirname, "./public/img")));
 
 const db = require("./app/models");
 db.mongoose
   .connect(db.url)
-  .then((result) => {
+  .then(() => {
     console.log("Successfully connected to database");
   })
   .catch((err) => {
@@ -43,6 +45,4 @@ app.get("/", (req, res) => {
 require("./app/routes/product.routes")(app);
 require("./app/routes/order.routes")(app);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+module.exports = app;
