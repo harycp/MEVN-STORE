@@ -1,24 +1,16 @@
 const db = require("../models");
 const Product = db.products;
 
-exports.findAll = async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
-  try {
-    const products = await Product.find()
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
-      .exec();
-    const count = await Product.countDocuments();
-    res.send({
-      products,
-      totalPages: Math.ceil(count / limit),
-      currentPage: page,
+exports.findAll = (req, res) => {
+  Product.find()
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.status(409).send({
+        message: err.message,
+      });
     });
-  } catch (err) {
-    res.status(409).send({
-      message: err.message,
-    });
-  }
 };
 
 exports.findOne = (req, res) => {
